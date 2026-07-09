@@ -38,13 +38,23 @@ const totalItems = () => {
 
 //Remove Btn
 const removeBtn = (id) => {
-    const btn = document.createElement("button")
-    btn.classList.add("fa-solid", "fa-trash-can","text-center","w-full","h-full","my-auto")
-    btn.dataset.id = id
-    return btn
+    const i = document.createElement("i")
+    i.classList.add("fa-solid", "fa-trash-can","cursor-pointer")
+    i.dataset.action = "removeBtn"
+    i.dataset.id = id
+    return i
 }
 
 //Edit Btn
+
+const editBtn = (id) => {
+    const i = document.createElement("i")
+    i.classList.add("fa-solid", "fa-pen","cursor-pointer")
+    i.dataset.action = "editBtn"
+    i.dataset.id = id
+    return i
+}
+
 
 // Reset Inputs
 const resetInputs = () => {
@@ -97,14 +107,14 @@ const renderList = () => {
     totalDisplay(calculateTotal(), "#totalExpenses")
     for (let expenseData of expense) {
         const newCell = document.createElement("tr")
-        newCell.classList.add("border","border-black","my-10")
+        newCell.classList.add("border", "border-black", "my-10")
 
         const date = newTd(expenseData.date)
         date.classList.add("text-center")
-        
+
         const name = newTd(expenseData.name)
         name.classList.add("text-center")
-        
+
         const category = newTd(expenseData.category)
         category.classList.add("text-center")
 
@@ -112,8 +122,15 @@ const renderList = () => {
         amount.classList.add("text-center")
 
         const id = expenseData.id
+        const removeButton = removeBtn(id)
+        const editButton = editBtn(id)
+        const btnContainer = document.createElement("div")
+        btnContainer.classList.add("flex","items-center","justify-center","gap-2")
+        btnContainer.append(removeButton,editButton)
 
-        newCell.append(date, name, category, amount, removeBtn(id))
+        
+        
+        newCell.append(date, name, category, amount, btnContainer)
         listContainer.append(newCell)
     }
 }
@@ -138,10 +155,23 @@ expenseForm.addEventListener("submit", (e) => {
 
 //Event delegation
 listContainer.addEventListener("click", (e) => {
-    const clickedId = e.target.dataset.id
-    expense = expense.filter(expend => clickedId !== expend.id)
-    totalItems()
-    renderList()
+    const id = e.target.dataset.id
+    const action = e.target.dataset.action
+
+    if (action === "removeBtn") {
+        expense = expense.filter(item => id !== item.id)
+        totalItems()
+        renderList()
+    }
+    if (action === "editBtn") {
+        const idMatch = expense.find(item => id === item.id)
+        const newName = prompt("Edit your expense name:", idMatch.name)
+        
+        if(newName !== ""){
+        idMatch.name = newName.trim()
+        renderList()
+        }
+    }
 })
 
 

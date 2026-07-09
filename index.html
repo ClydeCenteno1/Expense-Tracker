@@ -14,29 +14,38 @@
         <h2 class="text-lg font-normal">Never forget about your finances!</h2>
     </div>
 
-    <section class="border border-black mx-5 rounded-lg py-4 shadow-lg">
-        <div class="lg:ml-20 flex max-md:justify-center items-center">
-            <i class="fa-solid fa-wallet text-6xl border border-black p-8 rounded-full"></i>
-        <div class="flex flex-col gap-2 font-semibold ml-10">
-            <h2 class="text-lg">TOTAL EXPENSES</h2>
-            <h3 ><span class="text-4xl font-bold" id="totalExpenses">$0</span></h3>
-            <h4>Total Items: <span id="totalItem">0</span></h4>
-        </div>
+    <section class="border border-slate-400 mx-5 rounded-lg py-4 shadow-md bg-gray-100 ">
+        <div class="flex justify-evenly items-center">
+            <i class="fa-solid fa-wallet text-3xl md:text-6xl border border-slate-400 md:p-8 rounded-full shrink-0 flex justify-center items-center max-md:w-20 max-md:h-20"></i>
+            <div>
+                <h2 class="md:text-lg">TOTAL EXPENSES</h2>
+                <h3><span class="md:text-4xl font-bold" id="totalExpenses">$0</span></h3>
+            </div>
+            <div>
+                <h4 class="flex flex-col ">Total Items: <span id="totalItem" class="md:text-4xl font-bold">0</span></h4>
+            </div>
+
         </div>
     </section>
 
     <section class="grid grid-cols-1 lg:grid-cols-12 mx-5 my-8 gap-4 ">
-        <div class="p-3 border border-black rounded-lg  lg:col-span-3 font-semibold shadow-lg">
+        <div class="p-3 border border-slate-400 rounded-lg  lg:col-span-3 font-semibold shadow-md bg-gray-100">
             <h2 class="pb-5 text-xl">ADD NEW EXPENSE</h2>
-            <form action="#" class="flex flex-col gap-y-3">
+            <form action="#" class="flex flex-col text-slate-800 gap-y-3">
                 <label for="expenseName">Expense Name</label>
-                <input type="text" class="border border-black rounded-lg p-2 font-normal" id="expenseName" placeholder="e.g, Groceries" required autocomplete="off">
+                <input type="text"
+                    class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                    id="expenseName" placeholder="e.g, Groceries" required autocomplete="off">
 
                 <label for="amount">AMOUNT ($)</label>
-                <input type="text" class="border border-black rounded-lg p-2 font-normal" id="amount" placeholder="$0.00" required autocomplete="off">
+                <input type="text"
+                    class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                    id="amount" placeholder="$0.00" required autocomplete="off">
 
                 <label for="category">CATEGORY</label>
-                <select name="category" class="border border-black rounded-lg p-3" id="category">
+                <select name="category"
+                    class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-3"
+                    id="category">
                     <option value="Category">Category</option>
                     <option value="Food">Food</option>
                     <option value="Entertainment">Entertainment</option>
@@ -46,13 +55,18 @@
                 </select>
 
                 <label for="date">DATE</label>
-                <input type="date" class="border border-black rounded-lg p-2 font-normal" id="date" required>
+                <input type="date"
+                    class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                    id="date" required>
 
-                <button type="submit" class="border border-black rounded-lg p-2 my-2 bg-gray-500 text-white">ADD EXPENSE</button>
+                <button type="submit"
+                    class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 my-2 bg-blue-700 text-white">ADD
+                    EXPENSE</button>
             </form>
         </div>
 
-        <div class="p-3 border border-black rounded-lg lg:col-span-9 font-semibold flex flex-col min-h-[30rem] shadow-lg">
+        <div
+            class="p-3 border border-slate-400 rounded-lg lg:col-span-9 font-semibold flex flex-col min-h-[30rem] shadow-md bg-gray-100">
             <h2 class="pb-5 text-xl">EXPENSE LIST</h2>
 
             <table id="listContainer" class="w-full max-md:text-[0.7rem]">
@@ -65,8 +79,9 @@
                 </tr>
             </table>
 
-            <div class="mt-auto text-end border-t border-black">
-                <h2 class="font-semibold text-2xl mt-4 mb-2 flex justify-between">TOTAL: <span id="totalExpenses" >0</span></h2>
+            <div class="mt-auto text-end border-t border-slate-100">
+                <h2 class="font-semibold text-2xl mt-4 mb-2 flex justify-between">TOTAL: <span
+                        id="totalExpenses">0</span></h2>
             </div>
         </div>
     </section>
