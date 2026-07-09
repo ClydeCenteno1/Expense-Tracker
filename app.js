@@ -107,8 +107,10 @@ const renderList = () => {
         
         const category = newTd(expenseData.category)
         category.classList.add("text-center")
-        const amount = newTd(expenseData.amount)
+
+        const amount = newTd(`$${expenseData.amount}`)
         amount.classList.add("text-center")
+
         const id = expenseData.id
 
         newCell.append(date, name, category, amount, removeBtn(id))
