@@ -7,7 +7,18 @@ const listContainer = document.querySelector("#listContainer")
 const tableHead = document.querySelector("#tableHead");
 const table = document.querySelector("table")
 
+// MODAL
+const dialog = document.querySelector("#editDialog");
+const editForm = document.querySelector('#editDialog form');
+const editExpenseNameInput = document.querySelector('#editExpenseName');
+const editAmountInput = document.querySelector('#editAmount');
+const editCategorySelect = document.querySelector('#editCategory');
+const editDateInput = document.querySelector('#editDate');
+const editCloseBtn = document.querySelector('#closeDialogBtn');
+const editSaveBtn = document.querySelector('#editDialog button[type="submit"]');
+
 let expense = []
+let currentEditingId = null
 
 // Date, Name, Amount, Category
 const date = () => {
@@ -38,21 +49,21 @@ const totalItems = () => {
 
 //Remove Btn
 const removeBtn = (id) => {
-    const i = document.createElement("i")
-    i.classList.add("fa-solid", "fa-trash-can","cursor-pointer")
-    i.dataset.action = "removeBtn"
-    i.dataset.id = id
-    return i
+    const tr = document.createElement("tr")
+    tr.classList.add("fa-solid", "fa-trash-can", "cursor-pointer")
+    tr.dataset.action = "removeBtn"
+    tr.dataset.id = id
+    return tr
 }
 
 //Edit Btn
 
 const editBtn = (id) => {
-    const i = document.createElement("i")
-    i.classList.add("fa-solid", "fa-pen","cursor-pointer")
-    i.dataset.action = "editBtn"
-    i.dataset.id = id
-    return i
+    const tr = document.createElement("tr")
+    tr.classList.add("fa-solid", "fa-pen", "cursor-pointer")
+    tr.dataset.action = "editBtn"
+    tr.dataset.id = id
+    return tr
 }
 
 
@@ -114,6 +125,7 @@ const renderList = () => {
 
         const name = newTd(expenseData.name)
         name.classList.add("text-center")
+        name.dataset.action = "name"
 
         const category = newTd(expenseData.category)
         category.classList.add("text-center")
@@ -122,14 +134,16 @@ const renderList = () => {
         amount.classList.add("text-center")
 
         const id = expenseData.id
+
         const removeButton = removeBtn(id)
         const editButton = editBtn(id)
-        const btnContainer = document.createElement("div")
-        btnContainer.classList.add("flex","items-center","justify-center","gap-2")
-        btnContainer.append(removeButton,editButton)
 
-        
-        
+        const btnContainer = document.createElement("div")
+        btnContainer.classList.add("text-center","space-x-2")
+        btnContainer.append(removeButton, editButton)
+
+
+
         newCell.append(date, name, category, amount, btnContainer)
         listContainer.append(newCell)
     }
@@ -152,6 +166,21 @@ expenseForm.addEventListener("submit", (e) => {
     renderList()
 })
 
+// MODAL FORM
+
+editForm.addEventListener("submit", e => {
+    e.preventDefault()
+
+    const matchedExpense = expense.find(item => item.id === currentEditingId)
+
+    matchedExpense.name = editExpenseNameInput.value
+    matchedExpense.amount = Number(editAmountInput.value)
+    matchedExpense.category = editCategorySelect.value
+    matchedExpense.date = editDateInput.value
+
+    renderList()
+    dialog.close()
+})
 
 //Event delegation
 listContainer.addEventListener("click", (e) => {
@@ -164,14 +193,18 @@ listContainer.addEventListener("click", (e) => {
         renderList()
     }
     if (action === "editBtn") {
-        const idMatch = expense.find(item => id === item.id)
-        const newName = prompt("Edit your expense name:", idMatch.name)
-        
-        if(newName !== ""){
-        idMatch.name = newName.trim()
-        renderList()
-        }
+        const matchedExpense = expense.find(item => item.id === id);
+
+        editExpenseNameInput.value = matchedExpense.name
+        editAmountInput.value = matchedExpense.amount
+        editCategorySelect.value = matchedExpense.category
+        editDateInput.value = matchedExpense.date
+
+        currentEditingId = matchedExpense.id
+        dialog.showModal()
     }
 })
 
-
+editCloseBtn.addEventListener("click", () => {
+    dialog.close()
+})

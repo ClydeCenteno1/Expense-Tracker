@@ -16,7 +16,8 @@
 
     <section class="border border-slate-400 mx-5 rounded-lg py-4 shadow-md bg-gray-100 ">
         <div class="flex justify-evenly items-center">
-            <i class="fa-solid fa-wallet text-3xl md:text-6xl border border-slate-400 md:p-8 rounded-full shrink-0 flex justify-center items-center max-md:w-20 max-md:h-20"></i>
+            <i
+                class="fa-solid fa-wallet text-3xl md:text-6xl border border-slate-400 md:p-8 rounded-full shrink-0 flex justify-center items-center max-md:w-20 max-md:h-20"></i>
             <div>
                 <h2 class="md:text-lg">TOTAL EXPENSES</h2>
                 <h3><span class="md:text-4xl font-bold" id="totalExpenses">$0</span></h3>
@@ -85,6 +86,46 @@
             </div>
         </div>
     </section>
+
+    <dialog id="editDialog" class="w-[50rem] p-5 rounded-xl shadow-lg border border-slate-100">
+        <form action="#" class="flex flex-col gap-4">
+            <label for="expenseName">Expense Name</label>
+            <input type="text" id="editExpenseName"
+                class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                placeholder="e.g, Groceries" autocomplete="off">
+
+            <label for="amount">AMOUNT ($)</label>
+            <input type="text" id="editAmount"
+                class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                placeholder="$0.00" autocomplete="off">
+
+            <label for="category">CATEGORY</label>
+            <select name="category"
+                class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                id="editCategory">
+                <option value="Category">Category</option>
+                <option value="Food">Food</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Transport">Transport</option>
+                <option value="Health">Health</option>
+            </select>
+
+            <label for="date">DATE</label>
+            <input type="date"
+                class="border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                id="editDate">
+            <div class="flex flex-col gap-y-1">
+                <button type="button"
+                    class="bg-blue-700 text-white border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal"
+                    id="closeDialogBtn">Close</button>
+                <button type="submit"
+                    class=" bg-blue-700 text-white border border-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 rounded-lg p-2 font-normal">Save
+                    Changes</button>
+            </div>
+        </form>
+    </dialog>
+
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="app.js"></script>
