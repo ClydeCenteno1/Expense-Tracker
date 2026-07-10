@@ -49,21 +49,20 @@ const totalItems = () => {
 
 //Remove Btn
 const removeBtn = (id) => {
-    const tr = document.createElement("tr")
-    tr.classList.add("fa-solid", "fa-trash-can", "cursor-pointer")
-    tr.dataset.action = "removeBtn"
-    tr.dataset.id = id
-    return tr
+    const icon = document.createElement("span")
+    icon.classList.add("fa-solid", "fa-trash-can", "cursor-pointer")
+    icon.dataset.action = "removeBtn"
+    icon.dataset.id = id
+    return icon
 }
 
 //Edit Btn
-
 const editBtn = (id) => {
-    const tr = document.createElement("tr")
-    tr.classList.add("fa-solid", "fa-pen", "cursor-pointer")
-    tr.dataset.action = "editBtn"
-    tr.dataset.id = id
-    return tr
+    const icon = document.createElement("span")
+    icon.classList.add("fa-solid", "fa-pen", "cursor-pointer")
+    icon.dataset.action = "editBtn"
+    icon.dataset.id = id
+    return icon
 }
 
 
@@ -118,33 +117,35 @@ const renderList = () => {
     totalDisplay(calculateTotal(), "#totalExpenses")
     for (let expenseData of expense) {
         const newCell = document.createElement("tr")
-        newCell.classList.add("border", "border-black", "my-10")
+        newCell.classList.add("border", "border-black", "align-middle")
 
         const date = newTd(expenseData.date)
-        date.classList.add("text-center")
+        date.classList.add("text-center", "align-middle")
 
         const name = newTd(expenseData.name)
-        name.classList.add("text-center")
+        name.classList.add("text-center", "align-middle")
         name.dataset.action = "name"
 
         const category = newTd(expenseData.category)
-        category.classList.add("text-center")
+        category.classList.add("text-center", "align-middle")
 
         const amount = newTd(`$${expenseData.amount}`)
-        amount.classList.add("text-center")
+        amount.classList.add("text-center", "align-middle")
 
         const id = expenseData.id
 
         const removeButton = removeBtn(id)
         const editButton = editBtn(id)
 
+        const actionCell = document.createElement("td")
+        actionCell.classList.add("text-center", "align-middle", "py-2")
+
         const btnContainer = document.createElement("div")
-        btnContainer.classList.add("text-center","space-x-2")
+        btnContainer.classList.add("flex", "items-center", "justify-center", "gap-2")
         btnContainer.append(removeButton, editButton)
 
-
-
-        newCell.append(date, name, category, amount, btnContainer)
+        actionCell.append(btnContainer)
+        newCell.append(date, name, category, amount, actionCell)
         listContainer.append(newCell)
     }
 }
